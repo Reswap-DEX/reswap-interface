@@ -12,7 +12,7 @@ import {
   Trade,
   TradeType,
   WETH
-} from '@uniswap/sdk'
+} from '@reswap/sdk'
 import { useMemo } from 'react'
 import { useActiveWeb3React } from '../hooks'
 import { useAllTokens } from '../hooks/Tokens'
@@ -109,14 +109,14 @@ export function useV1Trade(
   const inputIsETH = inputCurrency === ETHER
   const outputIsETH = outputCurrency === ETHER
 
-  // construct a direct or through ETH v1 route
+  // construct a direct or through FTM v1 route
   let pairs: Pair[] = []
   if (inputIsETH && outputPair) {
     pairs = [outputPair]
   } else if (outputIsETH && inputPair) {
     pairs = [inputPair]
   }
-  // if neither are ETH, it's token-to-token (if they both exist)
+  // if neither are FTM, it's token-to-token (if they both exist)
   else if (inputPair && outputPair) {
     pairs = [inputPair, outputPair]
   }

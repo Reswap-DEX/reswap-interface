@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { Contract } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, ETHER, Percent, WETH } from '@uniswap/sdk'
+import { Currency, currencyEquals, ETHER, Percent, WETH } from '@reswap/sdk'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -123,7 +123,7 @@ export default function RemoveLiquidity({
       { name: 'verifyingContract', type: 'address' }
     ]
     const domain = {
-      name: 'Uniswap V2',
+      name: 'Reswap V2',
       version: '1',
       chainId: chainId,
       verifyingContract: pair.liquidityToken.address
@@ -219,7 +219,7 @@ export default function RemoveLiquidity({
     if (approval === ApprovalState.APPROVED) {
       // removeLiquidityETH
       if (oneCurrencyIsETH) {
-        methodNames = ['removeLiquidityETH', 'removeLiquidityETHSupportingFeeOnTransferTokens']
+        methodNames = ['removeLiquidityFTM', 'removeLiquidityFTMSupportingFeeOnTransferTokens']
         args = [
           currencyBIsETH ? tokenA.address : tokenB.address,
           liquidityAmount.raw.toString(),
@@ -245,9 +245,9 @@ export default function RemoveLiquidity({
     }
     // we have a signataure, use permit versions of remove liquidity
     else if (signatureData !== null) {
-      // removeLiquidityETHWithPermit
+      // removeLiquidityFTMWithPermit
       if (oneCurrencyIsETH) {
-        methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']
+        methodNames = ['removeLiquidityFTMWithPermit', 'removeLiquidityFTMWithPermitSupportingFeeOnTransferTokens']
         args = [
           currencyBIsETH ? tokenA.address : tokenB.address,
           liquidityAmount.raw.toString(),
@@ -261,7 +261,7 @@ export default function RemoveLiquidity({
           signatureData.s
         ]
       }
-      // removeLiquidityETHWithPermit
+      // removeLiquidityFTMWithPermit
       else {
         methodNames = ['removeLiquidityWithPermit']
         args = [
@@ -581,10 +581,10 @@ export default function RemoveLiquidity({
                         ) : oneCurrencyIsWETH ? (
                           <StyledInternalLink
                             to={`/remove/${
-                              currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'ETH' : currencyIdA
-                            }/${currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'ETH' : currencyIdB}`}
+                              currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'FTM' : currencyIdA
+                            }/${currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'FTM' : currencyIdB}`}
                           >
-                            Receive ETH
+                            Receive FTM
                           </StyledInternalLink>
                         ) : null}
                       </RowBetween>

@@ -1,6 +1,6 @@
 import { TokenAddressMap, useDefaultTokenList, useUnsupportedTokenList } from './../state/lists/hooks'
 import { parseBytes32String } from '@ethersproject/strings'
-import { Currency, ETHER, Token, currencyEquals } from '@uniswap/sdk'
+import { Currency, ETHER, Token, currencyEquals } from '@reswap/sdk'
 import { useMemo } from 'react'
 import { useCombinedActiveList, useCombinedInactiveList } from '../state/lists/hooks'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
@@ -18,7 +18,7 @@ function useTokensFromMap(tokenMap: TokenAddressMap, includeUserAdded: boolean):
   const userAddedTokens = useUserAddedTokens()
 
   return useMemo(() => {
-    if (!chainId) return {}
+    if (!chainId || !tokenMap[chainId]) return {}
 
     // reduce to just tokens
     const mapWithoutUrls = Object.keys(tokenMap[chainId]).reduce<{ [address: string]: Token }>((newMap, address) => {
@@ -182,7 +182,7 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 }
 
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
-  const isETH = currencyId?.toUpperCase() === 'ETH'
+  const isETH = currencyId?.toUpperCase() === 'FTM'
   const token = useToken(isETH ? undefined : currencyId)
   return isETH ? ETHER : token
 }

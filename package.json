@@ -1,6 +1,6 @@
 {
-  "name": "@uniswap/interface",
-  "description": "Uniswap Interface",
+  "name": "@reswap/interface",
+  "description": "Reswap Interface",
   "homepage": ".",
   "private": true,
   "devDependencies": {
@@ -30,7 +30,7 @@
     "@uniswap/governance": "^1.0.2",
     "@uniswap/liquidity-staker": "^1.0.2",
     "@uniswap/merkle-distributor": "1.0.1",
-    "@uniswap/sdk": "3.0.3",
+    "@reswap/sdk": "^3.0.4",
     "@uniswap/token-lists": "^1.0.0-beta.19",
     "@uniswap/v2-core": "1.0.0",
     "@uniswap/v2-periphery": "^1.1.0-beta.0",
@@ -119,6 +119,6 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@uniswap/default-token-list": "^2.0.0"
+    "@reswap/default-token-list": "^2.0.0"
   }
 }
